@@ -407,6 +407,7 @@ def post(output_name) {
 
 def testBuild() {
 	def time_limit = 10
+	echo "************TESTING MICHAEL'S INSERT*************"
 	if(params.TIME_LIMIT) {
 		time_limit = params.TIME_LIMIT.toInteger()
 	}
