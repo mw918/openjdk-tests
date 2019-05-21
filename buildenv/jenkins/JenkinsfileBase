@@ -313,6 +313,7 @@ def runTest( ) {
 		timestamps{
 			echo 'Running tests...'
 			int iterations = 1;
+			echo 'The iterations is equal to 1'
 			if (params.ITERATIONS) {
 				iterations = "${params.ITERATIONS}".toInteger()
 			}
@@ -410,30 +411,37 @@ def testBuild() {
 	echo "************TESTING MICHAEL'S INSERT in testBuild*************"
 	if(params.TIME_LIMIT) {
 		time_limit = params.TIME_LIMIT.toInteger()
+		echo "At params.TIME_LIMIT"
 	}
 	timeout(time: time_limit, unit: 'HOURS') {
+		echo "At timeout"
 		try {
 			addJobDescription()
 
 			// prepare environment and compile test projects
 			if( params.IS_PARALLEL == true ){
 				setupParallelEnv()
+				echo "At if"
 			} else {
 				setup()
+				echo "At else"
 				//ToDo: temporary workaround for jck test parallel runs
 				// until build.xml is added into each subfolder
 				if( env.BUILD_LIST.startsWith('jck/')) {
+					echo "At 1"
 					def temp = env.BUILD_LIST
 					env.BUILD_LIST = "jck"
 					buildTest()
 					env.BUILD_LIST = temp
 				} else {
 					buildTest()
+					echo "At 2"
 				}
 				runTest()
 				post("${env.BUILD_LIST}")
 			}
 		} finally {
+			echo "at finally"
 			if (!params.KEEP_WORKSPACE) {
 				cleanWs()
 			}
