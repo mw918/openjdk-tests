@@ -109,20 +109,25 @@ def setupParallelEnv() {
 			def testSubDirSize = 0
 			
 			//For parallel suppose BUILD_LIST is one specific category
+			//sh is a Pipeline step (provided by the Pipeline: Nodes and Processes plugin) that executes the given shell command.
+			//Finds the directory these are in, and runs the shell script on them, and finds the size of the directory
 			dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
 				testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
 				testSubDirSize = testSubDirs.size()
 			}
+			//testSubDirSize is the number of jobs that run
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
 			parallel_tests = [:]
-
+			//This goes through each of the jobs that need to be run
 			for (int i = 0; i < testSubDirSize; i++) {
+				//First, get rid of the /'s from the current element
 				def testSubDir = testSubDirs[i].trim().replace("/","");
 				def TEST_JOB_NAME = "${JOB_NAME}"
 
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
+				//parallel_tests is a type that has a bunch of different strings indicating the parameters for your case
 				parallel_tests[testSubDir] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
@@ -313,10 +318,11 @@ def runTest( ) {
 		timestamps{
 			echo 'Running tests...'
 			int iterations = 1;
-			echo 'The iterations is equal to 1'
 			if (params.ITERATIONS) {
 				iterations = "${params.ITERATIONS}".toInteger()
 			}
+			echo "The iterations is equal to "
+			echo iterations
 			def CUSTOM_OPTION = ''
 			TARGET = "${params.TARGET}";
 			if (TARGET.contains('custom')) {
@@ -520,9 +526,16 @@ def uploadToArtifactory() {
 }
 
 def run_parallel_tests() {
+	echo 'In run_parallel_tests'
 	if (params.IS_PARALLEL == true) {
-		stage ("Parallel Tests") {
-			parallel parallel_tests
+		int iterations = 1;
+		if (params.ITERATIONS) {
+			iterations = "${params.ITERATIONS}".toInteger()
+		}
+		for (i = 0; i < iterations; i++) {
+			stage ("Parallel Tests") {
+				parallel parallel_tests
+			}
 		}
 	}
 }
