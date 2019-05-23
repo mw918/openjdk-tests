@@ -531,8 +531,10 @@ def run_parallel_tests() {
 		int iterations = 1;
 		if (params.ITERATIONS) {
 			iterations = "${params.ITERATIONS}".toInteger()
+			echo "The number of iterations is ${iterations}"
 		}
 		for (i = 0; i < iterations; i++) {
+			echo "Looping: this is loop number ${i}"
 			stage ("Parallel Tests") {
 				parallel parallel_tests
 			}
