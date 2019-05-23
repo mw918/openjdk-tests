@@ -321,8 +321,7 @@ def runTest( ) {
 			if (params.ITERATIONS) {
 				iterations = "${params.ITERATIONS}".toInteger()
 			}
-			echo "The iterations is equal to "
-			echo iterations
+			echo "The iterations is equal to ${iterations}"
 			def CUSTOM_OPTION = ''
 			TARGET = "${params.TARGET}";
 			if (TARGET.contains('custom')) {
