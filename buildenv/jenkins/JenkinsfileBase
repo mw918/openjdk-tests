@@ -165,6 +165,7 @@ def setupParallelEnv() {
 			
 			// return to top level pipeline file in order to exit node block before running tests in parallel
 		}
+		echo "The size of parallel_tests is ${parallel_tests.size()}"
 		}
 	}
 }
