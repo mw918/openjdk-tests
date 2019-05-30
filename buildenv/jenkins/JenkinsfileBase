@@ -125,7 +125,7 @@ def setupParallelEnv() {
 			for (int i = 0; i < testSubDirSize; i++) {
 				def testSubDir = testSubDirs[i].trim().replace("/","");
 				def TEST_JOB_NAME = "${JOB_NAME}"
-
+				
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
@@ -160,8 +160,9 @@ def setupParallelEnv() {
 						booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
 					]
 				}
+				echo "For testing purposes, the first element is ${parallel_tests[0]}"
 			}
-			echo "For testing purposes, the first element is ${parallel_tests[0]}"
+			
 			// return to top level pipeline file in order to exit node block before running tests in parallel
 		}
 	}
@@ -423,8 +424,10 @@ def testBuild() {
 
 			// prepare environment and compile test projects
 			if( params.IS_PARALLEL == true ){
+				echo "In parallel section"
 				setupParallelEnv()
 			} else {
+				echo "In the series section"
 				setup()
 				//ToDo: temporary workaround for jck test parallel runs
 				// until build.xml is added into each subfolder
