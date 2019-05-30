@@ -108,6 +108,12 @@ def setupParallelEnv() {
 			def testSubDirs = []
 			def testSubDirSize = 0
 			
+			//Added an iteration count
+			int iterations = 1;
+			if (params.ITERATIONS) {
+				iterations = "${params.ITERATIONS}".toInteger()
+			}
+			
 			//For parallel suppose BUILD_LIST is one specific category
 			dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
 				testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
@@ -155,6 +161,7 @@ def setupParallelEnv() {
 					]
 				}
 			}
+			echo "For testing purposes, the first element is ${parallel_tests[0]}"
 			// return to top level pipeline file in order to exit node block before running tests in parallel
 		}
 	}
