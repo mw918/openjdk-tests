@@ -123,6 +123,7 @@ def setupParallelEnv() {
 			parallel_tests = [:]
 
 			for (int i = 0; i < testSubDirSize; i++) {
+			for (int j = 0; j < iterations; j++) {
 				def testSubDir = testSubDirs[i].trim().replace("/","");
 				def TEST_JOB_NAME = "${JOB_NAME}"
 				
@@ -160,10 +161,10 @@ def setupParallelEnv() {
 						booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
 					]
 				}
-				echo "For testing purposes, the first element is ${parallel_tests[0]}"
 			}
 			
 			// return to top level pipeline file in order to exit node block before running tests in parallel
+		}
 		}
 	}
 }
