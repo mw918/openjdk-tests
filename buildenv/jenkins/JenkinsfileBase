@@ -130,7 +130,7 @@ def setupParallelEnv() {
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
-				parallel_tests[testSubDir] = {
+				parallel_tests[i ":" testSubDir] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
@@ -166,8 +166,6 @@ def setupParallelEnv() {
 			// return to top level pipeline file in order to exit node block before running tests in parallel
 		}
 		echo "The size of parallel_tests is ${parallel_tests.size()}"
-		parallel_tests.eachWithIndex { entry, i -> println "$i - Name: $entry.key Age: $entry.value"
-}
 		}
 	}
 }
