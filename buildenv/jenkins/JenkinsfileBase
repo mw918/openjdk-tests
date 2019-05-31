@@ -133,7 +133,7 @@ def setupParallelEnv() {
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
 				parallel_tests[counter] = {
-					build job: TEST_JOB_NAME, parameters: [
+					build job: TEST_JOB_NAME, number: counter, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
 						string(name: 'OPENJ9_REPO', value: OPENJ9_REPO),
