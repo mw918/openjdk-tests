@@ -122,15 +122,17 @@ def setupParallelEnv() {
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
 			parallel_tests = [:]
 
+			int counter = 0
 			for (int i = 0; i < testSubDirSize; i++) {
 			for (int j = 0; j < iterations; j++) {
+				counter++
 				def testSubDir = testSubDirs[i].trim().replace("/","");
 				def TEST_JOB_NAME = "${JOB_NAME}"
-				echo "Right now, i is ${i}, and j is ${j}"
+				echo "Right now, i is ${i}, and j is ${j}, which means that counter is ${counter}"
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
-				parallel_tests[i, j] = {
+				parallel_tests[counter] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
