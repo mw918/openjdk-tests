@@ -127,7 +127,7 @@ def setupParallelEnv() {
 			for (int j = 0; j < iterations; j++) {
 				counter++
 				def testSubDir = testSubDirs[i].trim().replace("/","");
-				def TEST_JOB_NAME = "${JOB_NAME} # ${counter}"
+				def TEST_JOB_NAME = "${JOB_NAME} ${counter}"
 				echo "Right now, i is ${i}, and j is ${j}, which means that counter is ${counter}"
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
