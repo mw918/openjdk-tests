@@ -133,7 +133,7 @@ def setupParallelEnv() {
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
 				//counterToString = ${counter}
-				echo "The counterToString is ${counterToString}"
+				//echo "The counterToString is ${counterToString}"
 				parallel_tests[counter] = {
 					build job: TEST_JOB_NAME, parameters: [
 					//build job: counterToString, parameters: [
