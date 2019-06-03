@@ -132,11 +132,11 @@ def setupParallelEnv() {
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
-				//counterToString = ${counter}
+				counterToString = "${counter}"
 				//echo "The counterToString is ${counterToString}"
 				parallel_tests[counter] = {
-					build job: TEST_JOB_NAME, parameters: [
-					//build job: counterToString, parameters: [
+					//build job: TEST_JOB_NAME, parameters: [
+					build job: counterToString, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
 						string(name: 'OPENJ9_REPO', value: OPENJ9_REPO),
