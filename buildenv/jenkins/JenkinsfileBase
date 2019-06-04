@@ -632,7 +632,6 @@ def uploadToArtifactory() {
 def run_parallel_tests() {
 	if (params.IS_PARALLEL == true) {
 		echo "The size of parallel_tests is ${parallel_tests.size()}"
-		println "${parallel_tests.keySet()}"
 		stage ("Parallel Tests") {
 			parallel parallel_tests
 		}
