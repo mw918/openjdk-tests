@@ -142,7 +142,7 @@ def setupParallelEnv() {
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
 				echo "The testSubDir MW is ${testSubDir} and i is ${i}"
-				tempTestSubDir0 = "${testSubDir}_0"
+				def tempTestSubDir0 = "${testSubDir}_0"
 				parallel_tests[tempTestSubDir0] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
