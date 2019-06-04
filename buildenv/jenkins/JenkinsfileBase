@@ -143,7 +143,7 @@ def setupParallelEnv() {
 				//BUILD_LIST, IS_PARALLEL)
 				echo "The testSubDir MW is ${testSubDir} and i is ${i}"
 				tempTestSubDir0 = "${testSubDir}_0"
-				parallel_tests[ttempTestSubDir0] = {
+				parallel_tests[tempTestSubDir0] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
@@ -179,7 +179,7 @@ def setupParallelEnv() {
 					]
 				}
 				tempTestSubDir1 = "${testSubDir}_1"
-				parallel_tests[ttempTestSubDir1] = {
+				parallel_tests[tempTestSubDir1] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
