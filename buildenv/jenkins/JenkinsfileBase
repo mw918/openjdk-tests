@@ -141,11 +141,8 @@ def setupParallelEnv() {
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
-
-				def tempTestSubDir0 = "${testSubDir}_${i}"
-				echo "The testSubDir MW is ${testSubDir}, tempTestSubDir0 MW is ${tempTestSubDir0}, and i is ${i}"
-				echo "The JenkinsFile is ${JenkinsFile}"
-				parallel_tests[tempTestSubDir0] = {
+				echo "The testSubDir MW is ${testSubDir}"
+				parallel_tests[testSubDir] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
