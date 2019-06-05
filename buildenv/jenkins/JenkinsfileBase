@@ -108,6 +108,11 @@ def setupParallelEnv() {
 			def testSubDirs = []
 			def testSubDirSize = 0
 			
+			int iterate = 1;
+			if (params.ITERATIONS) {
+				iterate = "${params.ITERATIONS}".toInteger()
+			}
+			
 			//For parallel suppose BUILD_LIST is one specific category
 			dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
 				testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
