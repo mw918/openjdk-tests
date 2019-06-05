@@ -127,7 +127,7 @@ def setupParallelEnv() {
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
 				
-				for (int i = 0; j < 4; j++) {
+				for (int j = 0; j < 4; j++) {
 				echo "The testSubDir MW is ${testSubDir}, tempTestSubDir0 MW is ${tempTestSubDir0}, j is ${j} and i is ${i}"
 				def tempTestSubDir0 = "${testSubDir}_${j}"
 				parallel_tests[tempTestSubDir0] = {
