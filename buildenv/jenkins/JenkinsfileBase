@@ -119,6 +119,7 @@ def setupParallelEnv() {
 				testSubDirSize = testSubDirs.size()
 			}
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
+			echo "iterate is equal to ${iterate}"
 			parallel_tests = [:]
 
 			for (int i = 0; i < testSubDirSize; i++) {
