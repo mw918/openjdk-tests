@@ -143,8 +143,8 @@ def setupParallelEnv() {
 				//BUILD_LIST, IS_PARALLEL)
 				
 				for (int j = 0; j < 4; j++) {
-				echo "The testSubDir MW is ${testSubDir}, tempTestSubDir0 MW is ${tempTestSubDir0}, j is ${j} and i is ${i}"
 				def tempTestSubDir0 = "${testSubDir}_${j}"
+				echo "The testSubDir MW is ${testSubDir}, tempTestSubDir0 MW is ${tempTestSubDir0}, j is ${j} and i is ${i}"
 				parallel_tests[tempTestSubDir0] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
