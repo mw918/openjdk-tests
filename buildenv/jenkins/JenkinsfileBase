@@ -121,7 +121,7 @@ def setupParallelEnv() {
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
 			echo "iterate is equal to ${iterate}"
 			parallel_tests = [:]
-
+for (int j = 0; j < iterate; j++) {
 			for (int i = 0; i < testSubDirSize; i++) {
 				def testSubDir = testSubDirs[i].trim().replace("/","");
 				def TEST_JOB_NAME = "${JOB_NAME}"
@@ -130,7 +130,7 @@ def setupParallelEnv() {
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
 				
-				for (int j = 0; j < iterate; j++) {
+				
 				def tempTestSubDir0 = "${testSubDir}_${j}"
 				echo "The testSubDir MW is ${testSubDir}, tempTestSubDir0 MW is ${tempTestSubDir0}, j is ${j} and i is ${i}"
 				parallel_tests[tempTestSubDir0] = {
