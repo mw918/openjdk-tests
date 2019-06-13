@@ -22,6 +22,7 @@ def makeTest(testParam) {
 }
 
 def setupEnv() {
+	echo "In setupEnv"
 	// if the provided ADOPTOPENJDK_REPO and ADOPTOPENJDK_BRANCH are not AdoptOpenJDK/openjdk-tests' master branch, clean the workspace and re-download it
 	if (params.ADOPTOPENJDK_REPO && params.ADOPTOPENJDK_BRANCH) {
 		if ( !params.ADOPTOPENJDK_REPO.contains( 'AdoptOpenJDK/openjdk-tests.git') || params.ADOPTOPENJDK_BRANCH != "master") {
@@ -91,7 +92,8 @@ def setupEnv() {
 	}
 
 	if (env.BUILD_LIST == 'openjdk' ||  env.BUILD_LIST == 'thirdparty_containers') {
-		env.DIAGNOSTICLEVEL ='noDetails'
+		env.DIAGNOSTICLEVEL ='
+		tails'
 	}
 
 	// Optional parameter RELEASE_TAG and it is only used in openjdk regression test
@@ -173,6 +175,7 @@ def setupParallelEnv() {
 
 def setup() {
 	stage('Setup') {
+		echo "In setup"
 		timestamps{
 			setupEnv()
 
