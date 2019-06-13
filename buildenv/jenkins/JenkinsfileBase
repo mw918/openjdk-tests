@@ -106,7 +106,9 @@ def setupEnv() {
 def setupParallelEnv() {
 	stage('setupParallelEnv') {
 		timestamps{
+			echo "In setupParallelEnv, haven't reached setupEnv yet"
 			setupEnv()
+			echo "In setupParallelEnv, HAS reached setupEnv"
 			def testSubDirs = []
 			def testSubDirSize = 0
 			
