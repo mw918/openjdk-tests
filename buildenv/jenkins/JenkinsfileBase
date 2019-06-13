@@ -448,7 +448,7 @@ def testBuild() {
 	timeout(time: TIME_LIMIT, unit: 'HOURS') {
 		try {
 			addJobDescription()
-
+			echo "Testing for commonalities" 
 			// prepare environment and compile test projects
 			if( params.IS_PARALLEL == true ){
 				setupParallelEnv()
