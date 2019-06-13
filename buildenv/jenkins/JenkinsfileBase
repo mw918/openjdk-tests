@@ -119,7 +119,9 @@ def setupParallelEnv() {
 			
 			//For parallel suppose BUILD_LIST is one specific category
 			dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
+				echo "Is this where it fails?"
 				testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
+				echo "Yes, this is where it fails"
 				testSubDirSize = testSubDirs.size()
 			}
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
