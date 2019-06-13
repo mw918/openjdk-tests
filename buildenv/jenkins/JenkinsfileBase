@@ -236,7 +236,6 @@ def setupParallelEnv() {
 
 def setup() {
 	stage('Setup') {
-	echo "In setup"
 		timestamps{
 			setupEnv()
 			echo "out of setupEnv"
