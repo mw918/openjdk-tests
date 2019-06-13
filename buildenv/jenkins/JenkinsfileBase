@@ -359,6 +359,7 @@ def runTest( ) {
 }
 
 def post(output_name) {
+	echo "In post"
 	stage('Post') {
 		timestamps{
 			if (output_name.contains(',')) {
@@ -382,7 +383,7 @@ def post(output_name) {
 				suffix = ".pax.Z"
 				pax_opt = "-x pax"
 			}
-
+			echo "Right above failIfNoResultsValue"
 			boolean failIfNoResultsValue = true
 			if (params.IS_PARALLEL == true) {
 				failIfNoResultsValue = false
