@@ -117,11 +117,15 @@ def setupParallelEnv() {
 			if (params.ITERATIONS) {
 				iterate = "${params.ITERATIONS}".toInteger()
 			}
-			echo "iterate is equal to ${iterate}"
+			//For parallel suppose BUILD_LIST is one specific category
+			dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
+				testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
+				testSubDirSize = testSubDirs.size()
+			}
+
 			parallel_tests = [:]
 			
 			if (iterate == 1){
-
 				def testSubDirs = []
 				def testSubDirSize = 0
 				
@@ -132,8 +136,7 @@ def setupParallelEnv() {
 					echo "Yes, this is where it fails"
 					testSubDirSize = testSubDirs.size()
 				}
-				echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
-				parallel_tests = [:]
+
 				for (int i = 0; i < testSubDirSize; i++) {
 					def testSubDir = testSubDirs[i].trim().replace("/","");
 					def TEST_JOB_NAME = "${JOB_NAME}"
