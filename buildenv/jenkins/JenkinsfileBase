@@ -445,12 +445,15 @@ def testBuild() {
 				//ToDo: temporary workaround for jck test parallel runs
 				// until build.xml is added into each subfolder
 				if( env.BUILD_LIST.startsWith('jck/')) {
+					echo "In the if part of starting with jck"
 					def temp = env.BUILD_LIST
 					env.BUILD_LIST = "jck"
 					buildTest()
 					env.BUILD_LIST = temp
 				} else {
+					echo "In the else alternative"
 					buildTest()
+					echo "End of buildTest, back to the else alternative"
 				}
 				runTest()
 				post("${env.BUILD_LIST}")
