@@ -178,7 +178,7 @@ def setupParallelEnv() {
 
 def setup() {
 	stage('Setup') {
-		echo "In setup"
+	echo "In setup"
 		timestamps{
 			setupEnv()
 
