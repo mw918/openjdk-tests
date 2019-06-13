@@ -22,6 +22,7 @@ def makeTest(testParam) {
 }
 
 def setupEnv() {
+	echo "In setupEnv"
 	// if the provided ADOPTOPENJDK_REPO and ADOPTOPENJDK_BRANCH are not AdoptOpenJDK/openjdk-tests' master branch, clean the workspace and re-download it
 	if (params.ADOPTOPENJDK_REPO && params.ADOPTOPENJDK_BRANCH) {
 		if ( !params.ADOPTOPENJDK_REPO.contains( 'AdoptOpenJDK/openjdk-tests.git') || params.ADOPTOPENJDK_BRANCH != "master") {
@@ -177,6 +178,7 @@ def setupParallelEnv() {
 
 def setup() {
 	stage('Setup') {
+		echo "In setup"
 		timestamps{
 			setupEnv()
 
