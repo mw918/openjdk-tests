@@ -103,6 +103,7 @@ def setupEnv() {
 		env.DOCKERIMAGE_TAG = params.DOCKERIMAGE_TAG
 	}
 	sh 'printenv'
+	echo "End of setupEnv"
 }
 
 def setupParallelEnv() {
