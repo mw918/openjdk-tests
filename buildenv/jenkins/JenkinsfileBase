@@ -181,7 +181,7 @@ def setup() {
 	echo "In setup"
 		timestamps{
 			setupEnv()
-
+			echo "out of setupEnv"
 			if (fileExists('openjdkbinary')) {
 				dir('openjdkbinary') {
 					deleteDir()
