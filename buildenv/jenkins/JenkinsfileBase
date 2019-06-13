@@ -100,6 +100,7 @@ def setupEnv() {
 		env.RELEASE_TAG = params.RELEASE_TAG
 	}
 	sh 'printenv'
+	echo "End of setupEnv"
 }
 
 def setupParallelEnv() {
