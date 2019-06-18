@@ -345,7 +345,7 @@ def runTest( ) {
 				iterations=1
 			}
 			for (i = 0; i < iterations; i++) {
-				echo "We're in the for loop, with i being ${i}
+				echo "We're in the for loop, with i being ${i}"
 				if (env.BUILD_LIST == 'openjdk' || env.BUILD_LIST.startsWith('jck')) {
 					echo "In the first if in runTest"
 					if (env.SPEC.startsWith('linux_x86-64')) {
