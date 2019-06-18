@@ -193,6 +193,7 @@ def setupParallelEnv() {
 				def TEST_JOB_NAME = "${JOB_NAME}"
 				echo "The job name is ${TEST_JOB_NAME}"
 				parallel_tests[tempDirectory] = {
+
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
@@ -225,7 +226,7 @@ def setupParallelEnv() {
 						string(name: 'RUNTIME_NAME', value: tempDirectory)
 					]
 				}
-				}
+				//}
 			}
 			
 		}
