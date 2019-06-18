@@ -347,6 +347,7 @@ def runTest( ) {
 			for (int i = 0; i < iterations; i++) {
 				if (env.BUILD_LIST == 'openjdk') {
 					if (env.SPEC.startsWith('linux_x86-64')) {
+					echo "We are in runTest, right above the other shell script"
 						wrap([$class: 'Xvfb', autoDisplayName: true]) {
 							def DISPLAY = sh (
 								script: 'ps -f  | grep \'[X]vfb\' | awk \'{print \$9}\'',
@@ -374,6 +375,7 @@ def runTest( ) {
 						makeTest("${RUNTEST_CMD}")
 					}
 				} else {
+					echo "Change of plan, in the else part"
 					makeTest("${RUNTEST_CMD}")
 				}
 			}
