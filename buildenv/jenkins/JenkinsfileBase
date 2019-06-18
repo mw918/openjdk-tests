@@ -130,8 +130,15 @@ def setupParallelEnv() {
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
 			echo "iterate is equal to ${iterate}"
 			parallel_tests = [:]
-
-			for (int i = 0; i < testSubDirSize; i++) {
+			if (iterate > 1)
+			{
+				iterationNumber = iterate
+			}
+			else
+			{
+				iterationNumber = testSubDirSize
+			}
+			for (int i = 0; i < iterationNumber; i++) {
 				def testSubDir = testSubDirs[i].trim().replace("/","");
 				def TEST_JOB_NAME = "${JOB_NAME}"
 
@@ -139,7 +146,7 @@ def setupParallelEnv() {
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
 				
-				for (int j = 0; j < iterate; j++) {
+				//for (int j = 0; j < iterate; j++) {
 				def tempTestSubDir0 = "${testSubDir}_${j}"
 				echo "The testSubDir MW is ${testSubDir}, tempTestSubDir0 MW is ${tempTestSubDir0}, j is ${j} and i is ${i}"
 				parallel_tests[tempTestSubDir0] = {
@@ -174,7 +181,7 @@ def setupParallelEnv() {
 						string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
 					]
 				}
-				}
+				//}
 			}
 			// return to top level pipeline file in order to exit node block before running tests in parallel
 		}
