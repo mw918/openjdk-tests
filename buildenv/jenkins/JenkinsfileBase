@@ -340,9 +340,16 @@ def runTest( ) {
 				CUSTOM_OPTION = "${TARGET.toUpperCase()}_TARGET='${CUSTOM_TARGET}'"
 			}
 			RUNTEST_CMD = "./openjdk-tests _${params.TARGET} ${CUSTOM_OPTION}"
+			if (params.IS_PARALLEL == true)
+			{
+				iterations=1
+			}
 			for (i = 0; i < iterations; i++) {
+				echo "We're in the for loop, with i being ${i}
 				if (env.BUILD_LIST == 'openjdk' || env.BUILD_LIST.startsWith('jck')) {
+					echo "In the first if in runTest"
 					if (env.SPEC.startsWith('linux_x86-64')) {
+					echo "We are in runTest, right above the other shell script"
 						wrap([$class: 'Xvfb', autoDisplayName: true]) {
 							def DISPLAY = sh (
 								script: 'ps -f  | grep \'[X]vfb\' | awk \'{print \$9}\'',
@@ -356,6 +363,7 @@ def runTest( ) {
 						makeTest("${RUNTEST_CMD}")
 					}
 				} else {
+					echo "Change of plan, in the else part"
 					makeTest("${RUNTEST_CMD}")
 				}
 			}
