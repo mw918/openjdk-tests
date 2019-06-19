@@ -211,7 +211,7 @@ def setupParallelEnv() {
 						booleanParam(name: 'KEEP_WORKSPACE', value: KEEP_WORKSPACE),
 						string(name: 'ARTIFACTORY_SERVER', value: ARTIFACTORY_SERVER),
 						booleanParam(name: 'PERSONAL_BUILD', value: PERSONAL_BUILD),
-						booleanParam(name: 'IS_PARALLEL', value: false),
+						booleanParam(name: 'IS_PARALLEL', value: true),
 						booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
 					]
 				}
