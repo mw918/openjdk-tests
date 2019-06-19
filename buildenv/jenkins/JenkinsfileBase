@@ -280,6 +280,7 @@ def setupParallelEnv() {
 				for (int i = 0; i<iterate; i++)
 				{
 				def tempDirectory = "time_${i}"
+				def TEST_JOB_NAME = "${JOB_NAME}"
 				parallel_tests[tempDirectory] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
