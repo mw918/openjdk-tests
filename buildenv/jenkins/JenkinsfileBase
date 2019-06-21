@@ -392,6 +392,7 @@ def runTest( ) {
 				CUSTOM_OPTION = "${TARGET.toUpperCase()}_TARGET='${CUSTOM_TARGET}'"
 			}
 			RUNTEST_CMD = "./openjdk-tests _${params.TARGET} ${CUSTOM_OPTION}"
+<<<<<<< HEAD
 			for (int i = 0; i < iterations; i++) {
 				if (env.BUILD_LIST == 'openjdk') {
 					if (env.SPEC.startsWith('linux_x86-64')) {
@@ -410,6 +411,18 @@ def runTest( ) {
 					}
 				} else if (env.BUILD_LIST.startsWith('jck')) {
 					if (env.SPEC.startsWith('linux')) {
+=======
+			//if (params.IS_PARALLEL == true)
+			//{
+			//	iterations=1
+			//}
+			for (i = 0; i < iterations; i++) {
+				echo "We're in the for loop, with i being ${i}"
+				if (env.BUILD_LIST == 'openjdk' || env.BUILD_LIST.startsWith('jck')) {
+					echo "In the first if in runTest"
+					if (env.SPEC.startsWith('linux_x86-64')) {
+					echo "We are in runTest, right above the other shell script"
+>>>>>>> fe416fe65d14b2999150347bf311e80fbdb8ac1f
 						wrap([$class: 'Xvfb', autoDisplayName: true]) {
 							def DISPLAY = sh (
 								script: 'ps -f  | grep \'[X]vfb\' | awk \'{print \$9}\'',
@@ -478,8 +491,16 @@ def post(output_name) {
 					uploadToArtifactory()
 				}
 			}
+<<<<<<< HEAD
 			//for performance test, archive regardless the build result
 			if (env.BUILD_LIST.startsWith('perf')) {
+=======
+			//for performance test, achive regardless the build result
+			//TODO: Need to soft-code the output dir path
+			def benchmark_test_output_dir = 'jvmtest/performance/odm/ilog_wodm881/leftoverResults';
+			if (fileExists(benchmark_test_output_dir)) {
+			echo "In section checking if the file exists"
+>>>>>>> fe416fe65d14b2999150347bf311e80fbdb8ac1f
 				def benchmark_output_tar_name = "benchmark_test_output${suffix}"
 				sh "${tar_cmd} ${benchmark_output_tar_name} ${pax_opt} ./openjdk-tests/TestConfig/test_output_*"
 				if (!params.ARTIFACTORY_SERVER) {
