@@ -139,8 +139,6 @@ def setupParallelEnv() {
 					//ToDo: need to find a better way to pass parameters to downstream builds.
 					//Ideally, we should only need to pass in modified parameters (i.e.,
 					//BUILD_LIST, IS_PARALLEL)
-					
-					for (int j = 0; j < iterate; j++) {
 						parallel_tests[testSubDir] = {
 							build job: TEST_JOB_NAME, parameters: [
 								string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
@@ -174,7 +172,6 @@ def setupParallelEnv() {
 								string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
 							]
 						}
-					}
 				}
 				// return to top level pipeline file in order to exit node block before running tests in parallel
 			}
