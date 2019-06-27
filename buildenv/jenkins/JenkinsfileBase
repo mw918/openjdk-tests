@@ -525,7 +525,8 @@ def uploadToArtifactory() {
 
 def run_parallel_tests() {
 	String command = "curl https://hyc-runtimes-jenkins.swg-devops.com/view/Test_grinder/job/Grinder_Sandbox3/865/consoleFull/consoleText"
-	def try = sh(returnStdout: true, script: "echo hello world").trim().tokenize()
+	//def try = sh(returnStdout: true, script: "echo hello world").trim().tokenize()
+	def try = sh(returnStdout: true, script: "echo hello world")
 	if (params.IS_PARALLEL == true) {
 		stage ("Parallel Tests") {
 			parallel parallel_tests
