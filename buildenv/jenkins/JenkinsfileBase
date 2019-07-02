@@ -529,8 +529,9 @@ def run_parallel_tests() {
 	//sh (script: "echo 'hello world'");
 	//sh "$echo 'hello world'";
 	//sh "$curl http://watchout4snakes.com/wo4snakes/Random/RandomWord";
-	def printout = sh script: 'echo hello world', returnStdout: true
-	def pageout = sh script: 'curl http://watchout4snakes.com/wo4snakes/Random/RandomWord', returnStdout: true
+	def printout = sh script: 'echo hello world', returnStdout: true;
+	def pageout = sh script: 'curl http://watchout4snakes.com/wo4snakes/Random/RandomWord', returnStdout: true;
+	echo "End of trying something"
 	//def try = sh(returnStdout: true, script: "echo hello world")
 	if (params.IS_PARALLEL == true) {
 		stage ("Parallel Tests") {
