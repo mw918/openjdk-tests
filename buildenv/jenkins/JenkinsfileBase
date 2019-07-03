@@ -118,10 +118,6 @@ def setupParallelEnv() {
 			}
 			echo "testSubDirSize is ${testSubDirSize}, testSubDirs is ${testSubDirs}, running test in parallel mode"
 			parallel_tests = [:]
-
-			echo "Trying something"
-			def printout = sh script: '$ echo hello world', returnStdout: true;
-			echo "End of trying something"
 			
 			for (int i = 0; i < testSubDirSize; i++) {
 				def testSubDir = testSubDirs[i].trim().replace("/","");
@@ -279,7 +275,13 @@ def buildTest() {
 	stage('Build') {
 		timestamps{
 			echo 'Building tests...'
-
+			
+			
+			echo "Trying something"
+			def printout = sh script: '$ echo hello world', returnStdout: true;
+			echo "End of trying something"
+			
+			
 			if ( params.PERF_CREDENTIALS_ID ) {
 				withCredentials([usernamePassword(credentialsId: "$params.PERF_CREDENTIALS_ID",
 					passwordVariable: "PASSWORD_VAR", usernameVariable: "USERNAME_VAR")]) {
