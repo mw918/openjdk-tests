@@ -456,7 +456,8 @@ def testBuild() {
 		//def printout = sh script: 'echo hello world', returnStdout: true;
 		sh "echo 'second thing'";
 		sh "curl http://watchout4snakes.com/wo4snakes/Random/RandomWord"
-		sh "echo SitesApp.getActivePage().getUrl()"
+		def link = SitesApp.getActivePage().getUrl()
+		echo "The URL is ${link}"
 		echo "End of trying something"
 		
 
