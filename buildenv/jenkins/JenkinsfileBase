@@ -458,7 +458,7 @@ def testBuild() {
 		sh "curl http://watchout4snakes.com/wo4snakes/Random/RandomWord"
 		def link = "${BUILD_URL}/consoleText"
 		echo "The URL is ${link}"
-		sh "curl ${link}"
+		sh "wget ${link}"
 		echo "End of trying something"
 		
 
