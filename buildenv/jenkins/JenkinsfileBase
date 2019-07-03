@@ -278,7 +278,7 @@ def buildTest() {
 			
 			
 			echo "Trying something"
-			def printout = sh script: '$ echo hello world', returnStdout: true;
+			def printout = sh script: 'echo hello world', returnStdout: true;
 			echo "End of trying something"
 			
 			
