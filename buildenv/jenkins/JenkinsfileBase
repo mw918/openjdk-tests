@@ -275,14 +275,7 @@ def buildTest() {
 	stage('Build') {
 		timestamps{
 			echo 'Building tests...'
-			
-			
-			echo "Trying something"
-			//def printout = sh script: 'echo hello world', returnStdout: true;
-			sh "echo 'second thing'";
-			sh "curl http://watchout4snakes.com/wo4snakes/Random/RandomWord"
-			echo "End of trying something"
-			
+
 			
 			if ( params.PERF_CREDENTIALS_ID ) {
 				withCredentials([usernamePassword(credentialsId: "$params.PERF_CREDENTIALS_ID",
@@ -458,6 +451,13 @@ def testBuild() {
 				cleanWs()
 			}
 		}
+
+		echo "Trying something"
+		//def printout = sh script: 'echo hello world', returnStdout: true;
+		sh "echo 'second thing'";
+		sh "curl http://watchout4snakes.com/wo4snakes/Random/RandomWord"
+		echo "End of trying something"
+		
 
 	}
 }
