@@ -455,10 +455,11 @@ def testBuild() {
 		echo "Trying something"
 		//def printout = sh script: 'echo hello world', returnStdout: true;
 		sh "echo 'second thing'";
-		sh "curl http://watchout4snakes.com/wo4snakes/Random/RandomWord"
+		//sh "curl http://watchout4snakes.com/wo4snakes/Random/RandomWord"
 		def link = "${BUILD_URL}/consoleText"
 		echo "The URL is ${link}"
-		sh "wget ${link}"
+		sh "curl ${link}"
+		sh "curl -X POST http://jenkins.rtcamp.com/job/Snapbox/buildWithParameters --user 'username:password'"
 		echo "End of trying something"
 		
 
@@ -535,15 +536,6 @@ def uploadToArtifactory() {
 }
 
 def run_parallel_tests() {
-	//String command = "curl https://hyc-runtimes-jenkins.swg-devops.com/view/Test_grinder/job/Grinder_Sandbox3/865/consoleFull/consoleText"
-	
-	//sh (script: "echo 'hello world'");
-	//sh "$echo 'hello world'";
-	//sh "$curl http://watchout4snakes.com/wo4snakes/Random/RandomWord";
-	
-	//def pageout = sh script: 'curl http://watchout4snakes.com/wo4snakes/Random/RandomWord', returnStdout: true;
-	
-	//def try = sh(returnStdout: true, script: "echo hello world")
 	if (params.IS_PARALLEL == true) {
 		stage ("Parallel Tests") {
 			parallel parallel_tests
