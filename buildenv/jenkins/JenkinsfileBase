@@ -459,7 +459,7 @@ def testBuild() {
 		def link = "${BUILD_URL}/consoleText"
 		echo "The URL is ${link}"
 		sh "curl -X POST http://jenkins.rtcamp.com/job/Snapbox/buildWithParameters --user 'username:password'; curl ${link}"
-		sh "curl ${link}"
+		//sh "curl ${link}"
 		echo "End of trying something"
 		
 
