@@ -188,7 +188,7 @@ def setupParallelEnv() {
 						booleanParam(name: 'PERSONAL_BUILD', value: PERSONAL_BUILD),
 						booleanParam(name: 'IS_PARALLEL', value: false),
 						booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
-						string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
+						//string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
 						string(name: 'RUNTIME_NAME', value: testSubDir)
 					]
 				}
