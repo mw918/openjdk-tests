@@ -150,7 +150,7 @@ def setupParallelEnv() {
 				}
 				else{
 					testSubDir = "time_${i}"
-					buildListName = env.BUILD_LIST
+					buildListName = "${env.BUILD_LIST}"
 				}
 				echo "The testSubDir is ${testSubDir}"
 				def TEST_JOB_NAME = "${JOB_NAME}"
