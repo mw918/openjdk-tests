@@ -140,6 +140,8 @@ def setupParallelEnv() {
 				loopNumber = iterate
 			}
 			
+			echo "The loopNumber is ${loopNumber}"
+			
 			for (int i = 0; i < loopNumber; i++) 
 			{
 				if (iterate == 1){
