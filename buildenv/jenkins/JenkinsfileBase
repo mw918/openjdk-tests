@@ -154,9 +154,8 @@ def setupParallelEnv() {
 					echo "Renaming testSubDir"
 				}
 				echo "The testSubDir is ${testSubDir}"
-				def TEST_JOB_NAME = "${JOB_NAME}"
+				def TEST_JOB_NAME = "${JOB_NAME}_${i}"
 				echo "The job name is ${TEST_JOB_NAME}"
-				sleep(3000)
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
