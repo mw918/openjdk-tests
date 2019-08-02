@@ -123,11 +123,11 @@ def setupParallelEnv() {
 			int one = 1
 			def buildListName = ""
 			def testSubDir = ""
+			def testSubDirs = []
+			def testSubDirSize = 0
 			
 			//Setup for option-specific parameters
 			if (iterate == 1){
-				def testSubDirs = []
-				def testSubDirSize = 0
 				//For parallel suppose BUILD_LIST is one specific category
 				dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
 					testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
