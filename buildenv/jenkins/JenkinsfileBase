@@ -154,7 +154,7 @@ def setupParallelEnv() {
 					echo "Renaming testSubDir"
 				}
 				echo "The testSubDir is ${testSubDir}"
-				def TEST_JOB_NAME = "${JOB_NAME}_${i}"
+				def TEST_JOB_NAME = "${JOB_NAME}"
 				echo "The job name is ${TEST_JOB_NAME}"
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
@@ -169,6 +169,7 @@ def setupParallelEnv() {
 						string(name: 'JenkinsFile', value: JenkinsFile),
 						string(name: 'JDK_VERSION', value: JDK_VERSION),
 						string(name: 'JDK_IMPL', value: JDK_IMPL),
+						string(name: 'RUNTIME_NAME', value: testSubDir)
 						string(name: 'BUILD_LIST', value: buildListName),
 						string(name: 'TARGET', value: TARGET),
 						string(name: 'CUSTOM_TARGET', value: CUSTOM_TARGET),
@@ -191,7 +192,6 @@ def setupParallelEnv() {
 						booleanParam(name: 'IS_PARALLEL', value: false),
 						booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
 						//string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
-						string(name: 'RUNTIME_NAME', value: testSubDir)
 					]
 				}
 			}
