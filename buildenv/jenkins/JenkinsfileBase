@@ -166,7 +166,7 @@ def setupParallelEnv() {
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
 						string(name: 'OPENJ9_REPO', value: OPENJ9_REPO),
 						string(name: 'OPENJ9_BRANCH', value: OPENJ9_BRANCH),
-						string(name: 'JenkinsFile', value: JenkinsFile),
+						string(name: 'JenkinsFile', value: JENKINS_FILE),
 						string(name: 'JDK_VERSION', value: JDK_VERSION),
 						string(name: 'JDK_IMPL', value: JDK_IMPL),
 						string(name: 'RUNTIME_NAME', value: testSubDir),
