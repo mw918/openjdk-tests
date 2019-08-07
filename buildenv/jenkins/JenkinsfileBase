@@ -111,6 +111,7 @@ def setupParallelEnv() {
 			setupEnv()
 			int one = 1
 			int iterate = 1;
+			def buildListName = ""
 			if (params.ITERATIONS) {
 				iterate = "${params.ITERATIONS}".toInteger()
 			}
@@ -120,7 +121,7 @@ def setupParallelEnv() {
 			if (iterate == 1){
 				def testSubDirs = []
 				def testSubDirSize = 0
-					
+				
 					//For parallel suppose BUILD_LIST is one specific category
 					dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") {
 						testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
@@ -130,7 +131,7 @@ def setupParallelEnv() {
 				for (int i = 0; i < testSubDirSize; i++) {
 					def testSubDir = testSubDirs[i].trim().replace("/","");
 					def TEST_JOB_NAME = "${JOB_NAME}"
-
+					buildListName = "${env.BUILD_LIST}/${testSubDir}"
 					//ToDo: need to find a better way to pass parameters to downstream builds.
 					//Ideally, we should only need to pass in modified parameters (i.e.,
 					//BUILD_LIST, IS_PARALLEL)
@@ -143,7 +144,7 @@ def setupParallelEnv() {
 								string(name: 'JenkinsFile', value: JenkinsFile),
 								string(name: 'JDK_VERSION', value: JDK_VERSION),
 								string(name: 'JDK_IMPL', value: JDK_IMPL),
-								string(name: 'BUILD_LIST', value: "${env.BUILD_LIST}/${testSubDir}"),
+								string(name: 'BUILD_LIST', value: buildListName),
 								string(name: 'TARGET', value: TARGET),
 								string(name: 'CUSTOM_TARGET', value: CUSTOM_TARGET),
 								string(name: 'SDK_RESOURCE', value: SDK_RESOURCE),
@@ -174,6 +175,7 @@ def setupParallelEnv() {
 					def tempDirectory = "time_${i}"
 					def TEST_JOB_NAME = "${JOB_NAME}"
 					echo "The job name is ${TEST_JOB_NAME}"
+					buildListName = "env.BUILD_LIST"
 					parallel_tests[tempDirectory] = {
 
 						build job: TEST_JOB_NAME, parameters: [
@@ -184,7 +186,7 @@ def setupParallelEnv() {
 							string(name: 'JenkinsFile', value: JenkinsFile),
 							string(name: 'JDK_VERSION', value: JDK_VERSION),
 							string(name: 'JDK_IMPL', value: JDK_IMPL),
-							string(name: 'BUILD_LIST', value: env.BUILD_LIST),
+							string(name: 'BUILD_LIST', value: buildListName),
 							string(name: 'TARGET', value: TARGET),
 							string(name: 'CUSTOM_TARGET', value: CUSTOM_TARGET),
 							string(name: 'SDK_RESOURCE', value: SDK_RESOURCE),
