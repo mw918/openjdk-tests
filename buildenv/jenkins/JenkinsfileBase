@@ -177,6 +177,8 @@ def setupParallelEnv() {
 								string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
 						]
 					}
+				}
+			}
 			else{
 				for (int i = 0; i<iterate; i++){
 					def tempDirectory = "time_${i}"
