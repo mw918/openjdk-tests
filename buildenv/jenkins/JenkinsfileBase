@@ -154,6 +154,7 @@ def setupParallelEnv() {
 					echo "Renaming testSubDir"
 				}
 				echo "The testSubDir is ${testSubDir}"
+				echo "Iterate is equal to ${iterate}"
 				def TEST_JOB_NAME = "${JOB_NAME}"
 				echo "The job name is ${TEST_JOB_NAME}"
 				//ToDo: need to find a better way to pass parameters to downstream builds.
