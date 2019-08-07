@@ -109,7 +109,7 @@ def setupParallelEnv() {
 	stage('setupParallelEnv') {
 		timestamps{
 			setupEnv()
-			
+			int one = 1
 			int iterate = 1;
 			if (params.ITERATIONS) {
 				iterate = "${params.ITERATIONS}".toInteger()
@@ -170,7 +170,6 @@ def setupParallelEnv() {
 				}
 			}
 			else{
-				int one = 1
 				for (int i = 0; i<iterate; i++){
 					def tempDirectory = "time_${i}"
 					def TEST_JOB_NAME = "${JOB_NAME}"
