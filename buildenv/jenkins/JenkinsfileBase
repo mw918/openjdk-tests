@@ -145,7 +145,7 @@ def setupParallelEnv() {
 								string(name: 'JenkinsFile', value: JenkinsFile),
 								string(name: 'JDK_VERSION', value: JDK_VERSION),
 								string(name: 'JDK_IMPL', value: JDK_IMPL),
-								string(name: 'BUILD_LIST', value: buildListName),
+								string(name: 'BUILD_LIST', value: "${env.BUILD_LIST}/${testSubDir}"),
 								string(name: 'TARGET', value: TARGET),
 								string(name: 'CUSTOM_TARGET', value: CUSTOM_TARGET),
 								string(name: 'SDK_RESOURCE', value: SDK_RESOURCE),
@@ -601,7 +601,7 @@ def uploadToArtifactory(pattern) {
 def run_parallel_tests() {
 	if (params.IS_PARALLEL == true) {
 		echo "The size of parallel_tests is ${parallel_tests.size()}"
-		println "${parallel_tests.keySet()[7]}"
+		println "${parallel_tests.keySet()}"
 		stage ("Parallel Tests") {
 			parallel parallel_tests
 		}
