@@ -129,14 +129,14 @@ def setupParallelEnv() {
 					}
 
 				for (int i = 0; i < testSubDirSize; i++) {
-					def testSubDir = testSubDirs[i].trim().replace("/","");
+					def currentDirectory = testSubDirs[i].trim().replace("/","");
 					def TEST_JOB_NAME = "${JOB_NAME}"
-					buildListName = '${env.BUILD_LIST}/${testSubDir}'
+					buildListName = "${env.BUILD_LIST}/${currentDirectory}"
 					echo "The buildListName is ${buildListName}"
 					//ToDo: need to find a better way to pass parameters to downstream builds.
 					//Ideally, we should only need to pass in modified parameters (i.e.,
 					//BUILD_LIST, IS_PARALLEL)
-					parallel_tests[testSubDir] = {
+					parallel_tests[currentDirectory] = {
 							build job: TEST_JOB_NAME, parameters: [
 								string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 								string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
@@ -145,7 +145,7 @@ def setupParallelEnv() {
 								string(name: 'JenkinsFile', value: JenkinsFile),
 								string(name: 'JDK_VERSION', value: JDK_VERSION),
 								string(name: 'JDK_IMPL', value: JDK_IMPL),
-								string(name: 'BUILD_LIST', value: buildListName),
+								string(name: 'BUILD_LIST', value: "${env.BUILD_LIST}/${currentDirectory}"),
 								string(name: 'TARGET', value: TARGET),
 								string(name: 'CUSTOM_TARGET', value: CUSTOM_TARGET),
 								string(name: 'SDK_RESOURCE', value: SDK_RESOURCE),
