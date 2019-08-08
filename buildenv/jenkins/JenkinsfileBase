@@ -112,6 +112,7 @@ def setupParallelEnv() {
 			int one = 1
 			int iterate = 1;
 			def buildListName = ""
+			def currentDirectory = ""
 			if (params.ITERATIONS) {
 				iterate = "${params.ITERATIONS}".toInteger()
 			}
@@ -129,7 +130,7 @@ def setupParallelEnv() {
 					}
 
 				for (int i = 0; i < testSubDirSize; i++) {
-					def currentDirectory = testSubDirs[i].trim().replace("/","");
+					currentDirectory = testSubDirs[i].trim().replace("/","");
 					def TEST_JOB_NAME = "${JOB_NAME}"
 					buildListName = "${env.BUILD_LIST}/${currentDirectory}"
 					echo "The buildListName is ${buildListName}"
@@ -174,7 +175,7 @@ def setupParallelEnv() {
 			}
 			else{
 				for (int i = 0; i<iterate; i++){
-					def currentDirectory = "time_${i}"
+					currentDirectory = "time_${i}"
 					def TEST_JOB_NAME = "${JOB_NAME}"
 					echo "The job name is ${TEST_JOB_NAME}"
 					buildListName = env.BUILD_LIST
