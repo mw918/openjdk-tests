@@ -173,11 +173,11 @@ def setupParallelEnv() {
 			}
 			else{
 				for (int i = 0; i<iterate; i++){
-					def tempDirectory = "time_${i}"
+					def currentDirectory = "time_${i}"
 					def TEST_JOB_NAME = "${JOB_NAME}"
 					echo "The job name is ${TEST_JOB_NAME}"
 					buildListName = env.BUILD_LIST
-					parallel_tests[tempDirectory] = {
+					parallel_tests[currentDirectory] = {
 
 						build job: TEST_JOB_NAME, parameters: [
 							string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
@@ -208,7 +208,7 @@ def setupParallelEnv() {
 							booleanParam(name: 'PERSONAL_BUILD', value: PERSONAL_BUILD),
 							booleanParam(name: 'IS_PARALLEL', value: false),
 							booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
-							string(name: 'RUNTIME_NAME', value: tempDirectory)
+							string(name: 'RUNTIME_NAME', value: currentDirectory)
 						]
 					}
 				}
