@@ -58,6 +58,12 @@ def setupEnv() {
 	env.KEEP_REPORTDIR = params.KEEP_REPORTDIR ? params.KEEP_REPORTDIR : ''
 	SDK_RESOURCE = params.SDK_RESOURCE ? params.SDK_RESOURCE : "upstream"
 	env.AUTO_DETECT = params.AUTO_DETECT
+	
+	int iterate = 1
+	if (params.ITERATIONS) {
+		iterate = "${params.ITERATIONS}".toInteger()
+	}
+	
 	if (params.JDK_IMPL) {
 		env.JDK_IMPL = params.JDK_IMPL
 	} else if (params.JVM_VERSION) {
@@ -109,10 +115,7 @@ def setupParallelEnv() {
 	stage('setupParallelEnv') {
 		timestamps{
 			setupEnv()		
-			int iterate = 1
-			if (params.ITERATIONS) {
-				iterate = "${params.ITERATIONS}".toInteger()
-			}
+			
 			//Initialization for things in common between both multiple iterations and many subtests
 			//repeatAmount is the number of times the loops go through
 			int repeatAmount = 0
