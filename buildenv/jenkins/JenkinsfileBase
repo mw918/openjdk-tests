@@ -58,11 +58,7 @@ def setupEnv() {
 	env.KEEP_REPORTDIR = params.KEEP_REPORTDIR ? params.KEEP_REPORTDIR : ''
 	SDK_RESOURCE = params.SDK_RESOURCE ? params.SDK_RESOURCE : "upstream"
 	env.AUTO_DETECT = params.AUTO_DETECT
-	
-	int iterate = 1
-	if (params.ITERATIONS) {
-		iterate = "${params.ITERATIONS}".toInteger()
-	}
+
 	
 	if (params.JDK_IMPL) {
 		env.JDK_IMPL = params.JDK_IMPL
@@ -115,7 +111,11 @@ def setupParallelEnv() {
 	stage('setupParallelEnv') {
 		timestamps{
 			setupEnv()		
-			
+				
+		int iterate = 1
+		if (params.ITERATIONS) {
+			iterate = "${params.ITERATIONS}".toInteger()
+		}
 			//Initialization for things in common between both multiple iterations and many subtests
 			//repeatAmount is the number of times the loops go through
 			int repeatAmount = 0
@@ -180,7 +180,8 @@ def setupParallelEnv() {
 						string(name: 'EXTRA_OPTIONS', value: EXTRA_OPTIONS),
 						string(name: 'JVM_OPTIONS', value: JVM_OPTIONS),
 						string(name: 'JenkinsFile', value: JENKINS_FILE),
-						string(name: 'ITERATIONS', value: one.toString()),
+						//string(name: 'ITERATIONS', value: one.toString()),
+						string(name: 'ITERATIONS', value: "1"),
 						string(name: 'LABEL', value: LABEL),
 						string(name: 'JCK_GIT_REPO', value: JCK_GIT_REPO),
 						string(name: 'SSH_AGENT_CREDENTIAL', value: SSH_AGENT_CREDENTIAL),
