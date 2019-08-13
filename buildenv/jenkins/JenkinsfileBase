@@ -112,28 +112,27 @@ def setupParallelEnv() {
 		timestamps{
 			setupEnv()		
 				
-		int iterate = 1
-		if (params.ITERATIONS) {
-			iterate = "${params.ITERATIONS}".toInteger()
-		}
+			int iterate = 1
+			if (params.ITERATIONS) {
+				iterate = "${params.ITERATIONS}".toInteger()
+			}
 			//Initialization for things in common between both multiple iterations and many subtests
 			//repeatAmount is the number of times the loops go through
 			int repeatAmount = 0
 			int one = 1
 			
-			def testSubDirs = []
-			def testSubDirSize = 0
-			
-			dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") 
-			{
-				testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
-				testSubDirSize = testSubDirs.size()
-			}
-			
 			//Setup for option-specific parameters
 			if (iterate == 1){
 				//For parallel suppose BUILD_LIST is one specific category
 				repeatAmount = testSubDirSize
+				def testSubDirs = []
+				def testSubDirSize = 0
+				
+				dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") 
+				{
+					testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
+					testSubDirSize = testSubDirs.size()
+				}
 			}
 			else
 			{
