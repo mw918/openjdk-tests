@@ -119,12 +119,13 @@ def setupParallelEnv() {
 			//Initialization for things in common between both multiple iterations and many subtests
 			//repeatAmount is the number of times the loops go through
 			int repeatAmount = 0
+			def testSubDirs = []
+			def testSubDirSize = 0
 			
 			//Setup for option-specific parameters
 			if (iterate == 1){
 				//For parallel suppose BUILD_LIST is one specific category
-				def testSubDirs = []
-				def testSubDirSize = 0
+				
 				
 				dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") 
 				{
