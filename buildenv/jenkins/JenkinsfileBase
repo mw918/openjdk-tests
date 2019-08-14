@@ -123,7 +123,6 @@ def setupParallelEnv() {
 			//Setup for option-specific parameters
 			if (iterate == 1){
 				//For parallel suppose BUILD_LIST is one specific category
-				repeatAmount = testSubDirSize
 				def testSubDirs = []
 				def testSubDirSize = 0
 				
@@ -132,6 +131,7 @@ def setupParallelEnv() {
 					testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
 					testSubDirSize = testSubDirs.size()
 				}
+				repeatAmount = testSubDirSize
 			}
 			else
 			{
