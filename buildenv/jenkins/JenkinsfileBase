@@ -125,8 +125,6 @@ def setupParallelEnv() {
 			//Setup for option-specific parameters
 			if (iterate == 1){
 				//For parallel suppose BUILD_LIST is one specific category
-				
-				
 				dir("$WORKSPACE/openjdk-tests/${env.BUILD_LIST}") 
 				{
 					testSubDirs = sh(returnStdout: true, script: "ls -d */").trim().tokenize()
@@ -144,13 +142,13 @@ def setupParallelEnv() {
 
 			for (int i = 0; i < repeatAmount; i++) {
 				def buildListName = ""
-				def currentDirectory = ""
+				def childTest = ""
 				if (iterate == 1){
-					currentDirectory = testSubDirs[i].trim().replace("/","");
-					buildListName = "${env.BUILD_LIST}/${currentDirectory}"
+					childTest = testSubDirs[i].trim().replace("/","");
+					buildListName = "${env.BUILD_LIST}/${childTest}"
 				}
 				else{
-					currentDirectory = "test_iteration_${i}"
+					childTest = "test_iteration_${i}"
 					buildListName = env.BUILD_LIST
 				}
 				def TEST_JOB_NAME = "${JOB_NAME}"
@@ -158,7 +156,7 @@ def setupParallelEnv() {
 				//ToDo: need to find a better way to pass parameters to downstream builds.
 				//Ideally, we should only need to pass in modified parameters (i.e.,
 				//BUILD_LIST, IS_PARALLEL)
-				parallel_tests[currentDirectory] = {
+				parallel_tests[childTest] = {
 					build job: TEST_JOB_NAME, parameters: [
 						string(name: 'ADOPTOPENJDK_REPO', value: ADOPTOPENJDK_REPO),
 						string(name: 'ADOPTOPENJDK_BRANCH', value: ADOPTOPENJDK_BRANCH),
@@ -190,7 +188,7 @@ def setupParallelEnv() {
 						booleanParam(name: 'IS_PARALLEL', value: false),
 						booleanParam(name: 'AUTO_DETECT', value: AUTO_DETECT),
 						string(name: 'TIME_LIMIT', value: "${TIME_LIMIT}"),
-						string(name: 'RUNTIME_NAME', value: currentDirectory),
+						string(name: 'RUNTIME_NAME', value: childTest),
 					]
 				}
 			}
