@@ -59,6 +59,12 @@ def setupEnv() {
 	SDK_RESOURCE = params.SDK_RESOURCE ? params.SDK_RESOURCE : "upstream"
 	env.AUTO_DETECT = params.AUTO_DETECT
 	
+	env.ITERATIONS = 1;
+	
+	if (params.ITERATIONS) {
+		env.ITERATIONS = "${params.ITERATIONS}".toInteger()
+	}
+	
 	if (params.JDK_IMPL) {
 		env.JDK_IMPL = params.JDK_IMPL
 	} else if (params.JVM_VERSION) {
@@ -116,9 +122,8 @@ def setupParallelEnv() {
 			int repeatAmount = 0
 			def testSubDirs = []
 	
-			if (params.ITERATIONS) {
-				repeatAmount = "${params.ITERATIONS}".toInteger()
-			}
+			repeatAmount = env.ITERATIONS.toInteger()
+			
 			//Setup for option-specific parameters
 			if (repeatAmount == 1){
 				//For parallel suppose BUILD_LIST is one specific category
@@ -342,17 +347,13 @@ def runTest( ) {
 		timestamps{
 			echo 'Running tests...'
 			def CUSTOM_OPTION = ''
-			int iterations = 1;
-	
-			if (params.ITERATIONS) {
-				iterations = "${params.ITERATIONS}".toInteger()
-			}
+			
 			TARGET = "${params.TARGET}";
 			if (TARGET.contains('custom')) {
 				CUSTOM_OPTION = "${TARGET.toUpperCase()}_TARGET='${CUSTOM_TARGET}'"
 			}
 			RUNTEST_CMD = "./openjdk-tests _${params.TARGET} ${CUSTOM_OPTION}"
-			for (int i = 0; i < iterations; i++) {
+			for (int i = 0; i < env.ITERATIONS.toInteger(); i++) {
 				if (env.BUILD_LIST == 'openjdk') {
 					if (env.SPEC.startsWith('linux_x86-64')) {
 						wrap([$class: 'Xvfb', autoDisplayName: true]) {
