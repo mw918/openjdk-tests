@@ -354,7 +354,7 @@ def runTest( ) {
 		timestamps{
 			echo 'Running tests...'
 			echo 'Testing has been successful for Michael'
-			echo 'export TR_Options=verbose,vlog=michael.log'
+			export TR_Options=verbose,vlog=michael.log
 			def CUSTOM_OPTION = ''
 			
 			TARGET = "${params.TARGET}";
