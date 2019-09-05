@@ -38,4 +38,5 @@ ifeq ($(CYGWIN),1)
    PERL:=$(dir $(PERL))
    export PATH:=$(PERL):$(PATH)
 endif
+export TR_Options=verbose,vlog=testExample1.log
 SYSTEMTEST_RESROOT=$(TEST_RESROOT)/../
